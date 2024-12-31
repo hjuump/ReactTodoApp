@@ -72,3 +72,41 @@ yarn-error.log
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# iOS
+*.dSYM
+*.ipa
+*.bcsymbolmap
+*.swiftpm/xcode/xcshareddata/
+*.xcscmblueprint
+*.xcframework
+
+# Android
+*.apk
+*.ap_
+*.aab
+captures/
+*.trace
+*.kotlin_metadata
+
+# Node.js
+.npm/
+.yarn/cache
+.yarn/global
+.yarn-integrity
+.pnp.*
+
+# React Native
+.expo/
+.expo-shared/
+webview-cache/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+*.log
+
+# 환경 설정
+.env
+.env.*
