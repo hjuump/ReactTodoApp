@@ -13,7 +13,7 @@ function App(): React.JSX.Element {
   const [working, setWorking] = useState(true);
   const [text, setText] = useState('');
   const [toDos, setToDos] = useState<{
-    [key: string]: {text: string; work: boolean};
+    [key: string]: {text: string; working: boolean};
   }>({});
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
@@ -23,7 +23,7 @@ function App(): React.JSX.Element {
       return;
     }
     const newToDos = Object.assign({}, toDos, {
-      [Date.now()]: {text, work: working},
+      [Date.now()]: {text, working},
     });
     setToDos(newToDos);
     setText('');
@@ -56,11 +56,13 @@ function App(): React.JSX.Element {
           placeholder={working ? 'Add a To Do' : 'Where do you want to go?'}
         />
         <ScrollView>
-          {Object.keys(toDos).map(key => (
-            <View style={styles.toDo} key={key}>
-              <Text style={styles.toDoText}>{toDos[key].text}</Text>
-            </View>
-          ))}
+          {Object.keys(toDos).map(key =>
+            toDos[key].working === working ? (
+              <View style={styles.toDo} key={key}>
+                <Text style={styles.toDoText}>{toDos[key].text}</Text>
+              </View>
+            ) : null,
+          )}
         </ScrollView>
       </View>
     </View>
