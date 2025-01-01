@@ -1,24 +1,47 @@
-import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {theme} from './colors';
 
 function App(): React.JSX.Element {
+  const [working, setWorking] = useState(true);
+  const travel = () => setWorking(false);
+  const work = () => setWorking(true);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Hello, React Native!</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={work}>
+          <Text
+            style={{...styles.btnText, color: working ? 'white' : theme.grey}}>
+            Work
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={travel}>
+          <Text
+            style={{...styles.btnText, color: working ? theme.grey : 'white'}}>
+            Travel
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingHorizontal: 20,
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.bg,
   },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  header: {
+    marginTop: 100,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  btnText: {
+    fontSize: 44,
+    fontWeight: 600,
+    color: 'white',
   },
 });
 
