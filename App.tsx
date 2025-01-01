@@ -5,13 +5,28 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import {theme} from './colors';
 
 function App(): React.JSX.Element {
   const [working, setWorking] = useState(true);
+  const [text, setText] = useState('');
+  const [toDos, setToDos] = useState({});
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
+  const onChangeText = (payload: string) => setText(payload);
+  const addToDo = () => {
+    if (text === '') {
+      return;
+    }
+    const newToDos = Object.assign({}, toDos, {
+      [Date.now()]: {text, work: working},
+    });
+    setToDos(newToDos);
+    setText('');
+  };
+  console.log(toDos);
 
   return (
     <View style={styles.container}>
@@ -31,6 +46,10 @@ function App(): React.JSX.Element {
       </View>
       <View>
         <TextInput
+          returnKeyType="done"
+          onSubmitEditing={addToDo}
+          onChangeText={onChangeText}
+          value={text}
           style={styles.input}
           placeholder={working ? 'Add a To Do' : 'Where do you want to go?'}
         />
