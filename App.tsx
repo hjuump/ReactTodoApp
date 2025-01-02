@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Text,
   View,
@@ -77,6 +78,9 @@ function App(): React.JSX.Element {
             toDos[key].working === working ? (
               <View style={styles.toDo} key={key}>
                 <Text style={styles.toDoText}>{toDos[key].text}</Text>
+                <TouchableOpacity>
+                  <Icon name="close" size={24} color={theme.delete_btn} />
+                </TouchableOpacity>
               </View>
             ) : null,
           )}
@@ -111,6 +115,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   toDo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: theme.toDoBg,
     marginBottom: 10,
     paddingVertical: 20,
