@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Text,
   View,
@@ -9,16 +10,32 @@ import {
 } from 'react-native';
 import {theme} from './colors';
 
+const STORAGE_KEY = '@toDos';
 function App(): React.JSX.Element {
   const [working, setWorking] = useState(true);
   const [text, setText] = useState('');
   const [toDos, setToDos] = useState<{
     [key: string]: {text: string; working: boolean};
   }>({});
+  useEffect(() => {
+    loadToDos();
+  }, []);
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
   const onChangeText = (payload: string) => setText(payload);
-  const addToDo = () => {
+  const saveToDos = async (toSave: {
+    [key: string]: {text: string; working: boolean};
+  }) => {
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  };
+  const loadToDos = async () => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    if (s) {
+      setToDos(JSON.parse(s));
+    }
+  };
+
+  const addToDo = async () => {
     if (text === '') {
       return;
     }
@@ -26,9 +43,9 @@ function App(): React.JSX.Element {
       [Date.now()]: {text, working},
     });
     setToDos(newToDos);
+    await saveToDos(newToDos);
     setText('');
   };
-  console.log(toDos);
 
   return (
     <View style={styles.container}>
