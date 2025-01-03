@@ -65,6 +65,8 @@ function App(): React.JSX.Element {
     await saveToDos(newToDos);
     setText('');
   };
+  const setCompleted = () => {};
+  const editToDo = () => {};
 
   const deleteToDo = (key: string) => {
     Alert.alert('Delete To Do', 'Are you sure?', [
