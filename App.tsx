@@ -12,8 +12,15 @@ import {
 } from 'react-native';
 import {theme} from './colors';
 
-const STORAGE_KEY = '@toDos';
+const STORAGE_KEY_TODOS = '@toDos';
+const STORAGE_KEY_WORKING = '@working';
+
 function App(): React.JSX.Element {
+  // 코드 챌린지
+  // 1. 앱 재실행시, 마지막 상태의 Work 또는 Travel 기억하기 (완료)
+  // 2. Todo에 완료 기능 추가하기
+  // 3. Todo에 수정 기능 추가하기
+
   const [working, setWorking] = useState(true);
   const [text, setText] = useState('');
   const [toDos, setToDos] = useState<{
@@ -21,22 +28,32 @@ function App(): React.JSX.Element {
   }>({});
   useEffect(() => {
     loadToDos();
+    loadWorking();
   }, []);
-  const travel = () => setWorking(false);
-  const work = () => setWorking(true);
+  const travel = () => saveWorking(false);
+  const work = () => saveWorking(true);
   const onChangeText = (payload: string) => setText(payload);
   const saveToDos = async (toSave: {
     [key: string]: {text: string; working: boolean};
   }) => {
-    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    await AsyncStorage.setItem(STORAGE_KEY_TODOS, JSON.stringify(toSave));
   };
   const loadToDos = async () => {
-    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    const s = await AsyncStorage.getItem(STORAGE_KEY_TODOS);
     if (s) {
       setToDos(JSON.parse(s));
     }
   };
-
+  const saveWorking = async (working: boolean) => {
+    setWorking(working);
+    await AsyncStorage.setItem(STORAGE_KEY_WORKING, JSON.stringify(working));
+  };
+  const loadWorking = async () => {
+    const savedWorking = await AsyncStorage.getItem(STORAGE_KEY_WORKING);
+    if (savedWorking !== null) {
+      setWorking(JSON.parse(savedWorking));
+    }
+  };
   const addToDo = async () => {
     if (text === '') {
       return;
@@ -91,6 +108,7 @@ function App(): React.JSX.Element {
           value={text}
           style={styles.input}
           placeholder={working ? 'Add a To Do' : 'Where do you want to go?'}
+          autoCapitalize="none"
         />
         <ScrollView>
           {Object.keys(toDos).map(key =>
