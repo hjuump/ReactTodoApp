@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {theme} from './colors';
 
@@ -48,6 +49,24 @@ function App(): React.JSX.Element {
     setText('');
   };
 
+  const deleteToDo = (key: string) => {
+    Alert.alert('Delete To Do', 'Are you sure?', [
+      {
+        text: 'Cancel',
+      },
+      {
+        text: 'Delete',
+        onPress: () => {
+          const newToDos = {...toDos};
+          delete newToDos[key];
+          setToDos(newToDos);
+          saveToDos(newToDos);
+        },
+        style: 'destructive',
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -78,7 +97,10 @@ function App(): React.JSX.Element {
             toDos[key].working === working ? (
               <View style={styles.toDo} key={key}>
                 <Text style={styles.toDoText}>{toDos[key].text}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    deleteToDo(key);
+                  }}>
                   <Icon name="close" size={24} color={theme.delete_btn} />
                 </TouchableOpacity>
               </View>
