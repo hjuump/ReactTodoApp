@@ -1,81 +1,59 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 🗒 Work/Travel Todo 앱
 
-# Getting Started
+React Native로 제작된 Todo 관리 앱입니다. Work와 Travel 두 가지 카테고리로 할 일을 구분하여 관리할 수 있습니다.
 
 ![Demo of To Do App](docs/demo.gif)
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## ✨ 주요 기능
 
-## Step 1: Start the Metro Server
+- Work/Travel 모드 전환
+- Todo 항목 추가/삭제
+- 앱 재실행 시 마지막 상태(Work/Travel) 유지
+- AsyncStorage를 활용한 데이터 영구 저장
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## 🛠 기술 스택
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- React Native
+- TypeScript
+- @react-native-async-storage/async-storage
+- react-native-vector-icons
+
+## 📱 구현된 기능
+
+### 1. 상태 관리
+- `useState`와 `AsyncStorage`를 활용하여 Todo 항목과 현재 모드(Work/Travel) 상태 관리
+- 앱 종료 후 재실행시에도 데이터 유지
+
+### 2. UI/UX
+- 직관적인 모드 전환 버튼
+- 각 모드별 맞춤 입력 플레이스홀더
+- Todo 항목 삭제시 확인 알림
+- 스크롤 가능한 Todo 리스트
+
+### 3. 스타일링
+- 모드별 차별화된 색상 테마
+- 모던한 디자인의 입력 필드
+- 깔끔한 카드 형태의 Todo 항목
+
+## 🚀 향후 개발 계획
+
+- [ ] Todo 완료 기능 추가
+- [ ] Todo 수정 기능 추가
+- [ ] 카테고리별 통계 기능
+- [ ] 날짜/시간 정보 추가
+
+## ⚙️ 설치 및 실행
 
 ```bash
-# using npm
-npm start
+# 패키지 설치
+npm install
 
-# OR using Yarn
-yarn start
-```
+# 개발 서버 실행
+npm run start
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
+# iOS 실행
 npm run ios
 
-# OR using Yarn
-yarn ios
+# Android 실행
+npm run android
 ```
-
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
-
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
